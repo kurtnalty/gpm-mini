@@ -1,0 +1,60 @@
+gcc -c -o console-mouse/add_mouse.o          console-mouse/add_mouse.c
+gcc -c -o console-mouse/build_argv.o         console-mouse/build_argv.c
+gcc -c -o console-mouse/check_kill.o         console-mouse/check_kill.c
+gcc -c -o console-mouse/check_uniqueness.o   console-mouse/check_uniqueness.c
+gcc -c -o console-mouse/cmdline.o            console-mouse/cmdline.c
+gcc -c -o console-mouse/disable_paste.o      console-mouse/disable_paste.c
+gcc -c -o console-mouse/do_client.o          console-mouse/do_client.c
+gcc -c -o console-mouse/do_selection.o       console-mouse/do_selection.c
+gcc -c -o console-mouse/find_mouse_by_name.o console-mouse/find_mouse_by_name.c
+gcc -c -o console-mouse/get_console_size.o   console-mouse/get_console_size.c
+gcc -c -o console-mouse/get_data.o           console-mouse/get_data.c
+gcc -c -o console-mouse/getmousedata.o       console-mouse/getmousedata.c
+gcc -c -o console-mouse/getsym.o             console-mouse/getsym.c
+gcc -c -o console-mouse/gpm_exited.o         console-mouse/gpm_exited.c
+gcc -c -o console-mouse/gpm_killed.o         console-mouse/gpm_killed.c
+gcc -c -o console-mouse/gpm.o                console-mouse/gpm.c
+gcc -c -o console-mouse/header.o             console-mouse/header.c
+gcc -c -o console-mouse/init_mice.o          console-mouse/init_mice.c
+gcc -c -o console-mouse/isodigit.o           console-mouse/isodigit.c
+gcc -c -o console-mouse/loadlut.o            console-mouse/loadlut.c
+gcc -c -o console-mouse/main.o               console-mouse/main.c
+gcc -c -o console-mouse/mice.o               console-mouse/mice.c
+gcc -c -o console-mouse/old_main.o           console-mouse/old_main.c
+gcc -c -o console-mouse/open_console.o       console-mouse/open_console.c
+gcc -c -o console-mouse/processconn.o        console-mouse/processconn.c
+gcc -c -o console-mouse/processmouse.o       console-mouse/processmouse.c
+gcc -c -o console-mouse/processrequest.o     console-mouse/processrequest.c
+gcc -c -o console-mouse/report.o             console-mouse/report.c
+gcc -c -o console-mouse/reset_mice.o         console-mouse/reset_mice.c
+gcc -c -o console-mouse/selection_copy.o     console-mouse/selection_copy.c
+gcc -c -o console-mouse/selection_paste.o    console-mouse/selection_paste.c
+gcc -c -o console-mouse/startup.o            console-mouse/startup.c
+gcc -c -o console-mouse/tools.o              console-mouse/tools.c
+gcc -c -o console-mouse/usage.o              console-mouse/usage.c
+gcc -c -o console-mouse/wait_text.o          console-mouse/wait_text.c
+
+gcc -static -o gpm console-mouse/mice.o console-mouse/add_mouse.o console-mouse/init_mice.o \
+console-mouse/reset_mice.o console-mouse/build_argv.o console-mouse/disable_paste.o console-mouse/do_client.o \
+console-mouse/do_selection.o console-mouse/get_console_size.o console-mouse/get_data.o console-mouse/getmousedata.o \
+console-mouse/gpm.o console-mouse/gpm_killed.o console-mouse/header.o console-mouse/main.o console-mouse/old_main.o \
+console-mouse/open_console.o console-mouse/check_kill.o console-mouse/gpm_exited.o console-mouse/isodigit.o \
+console-mouse/getsym.o console-mouse/processconn.o console-mouse/processmouse.o \
+console-mouse/processrequest.o console-mouse/selection_copy.o console-mouse/selection_paste.o console-mouse/cmdline.o \
+console-mouse/loadlut.o console-mouse/find_mouse_by_name.o console-mouse/usage.o console-mouse/check_uniqueness.o \
+console-mouse/startup.o console-mouse/wait_text.o console-mouse/report.o console-mouse/tools.o   -lm
+
+strip -s gpm
+
+gcc -c -o lib/tools.o      lib/tools.c
+gcc -c -o lib/libhigh.o    lib/libhigh.c
+gcc -c -o lib/liblow.o     lib/liblow.c
+gcc -c -o lib/libxtra.o    lib/libxtra.c
+gcc -c -o lib/libcurses.o  lib/libcurses.c
+gcc -c -o lib/report-lib.o lib/report-lib.c
+
+ar rc lib/libgpm.a lib/libhigh.o lib/liblow.o lib/libxtra.o lib/libcurses.o lib/report-lib.o lib/tools.o
+ranlib lib/libgpm.a
+
+strip --strip-debug lib/libgpm.a
+

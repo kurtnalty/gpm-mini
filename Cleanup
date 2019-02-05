@@ -1,0 +1,5 @@
+rm gpm
+rm console-mouse/*.o
+rm lib/*.o
+rm lib/*.a
+
